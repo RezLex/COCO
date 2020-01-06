@@ -1,0 +1,2 @@
+  Select asignatura.nombre, calificacion.calificacion, calificacion.periodo from calificacion inner join asignatura on asignatura.id_asignatura = calificacion.id_asignatura where calificacion.registro = '16100290';
+Select alumno.nombre, alumno.apellido_paterno, alumno.apellido_materno, alumno.registro, carrera.nombre, alumno.celular, alumno.sexo, alumno.domicilio, municipio.nombre from alumno inner join municipio on alumno.clave_municipio = municipio.clave_municipio inner join carrera on alumno.id_carrera = carrera.id_carrera where alumno.registro = '16100290';

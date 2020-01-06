@@ -1,0 +1,48 @@
+body{
+	background: url(Inicio.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+
+}
+.form{
+	position: relative;
+width: 500px;
+height: 200px;
+padding-left: 20px;
+padding-top: 15px;
+background-color:#4F78E3;
+border-radius: 20px;   
+position: absolute;
+	top: 30%;
+	left: 30%;
+
+	
+
+
+} 
+input[type=submit]{
+
+	position:relative;
+	width: 150px;
+	height: 40px;
+	border-radius: 20px;
+	margin-left: 150px;
+	border: 0px;
+	background-color: #32A43E;
+	font: 14px normal normal uppercase helvetica, arial, serif;
+
+}
+
+input[type=text],[type=registro],[type=Password]{
+	width: 470px;
+	height: 35px;
+	font: 14px normal normal uppercase helvetica, arial, serif;
+}
+
+label{
+    font:bold 14px normal normal uppercase helvetica, arial, serif;
+
+}
+

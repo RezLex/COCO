@@ -1,0 +1,56 @@
+<?php
+
+$conectar=mysqli_connect('localhost','root','','ceti7h1') or die ("No se conectó a la base de datos");
+mysqli_query($conectar,"SET NAMES 'utf8'");
+	$registro=$_POST['Registro'];
+	$pass=$_POST['contra'];
+	if($registro=="Root"&&$pass=="1234"){
+		echo "Eres Administrador";
+	}else{
+		$res = "Select * from alumno where registro = '$registro' and password = '$pass'";
+		$sql=mysqli_query($conectar,$res);
+		if(!$sql){
+			echo"error";
+		}elseif(mysqli_num_rows($sql)==0){
+			$res = "Select * from docente where id_docente = '$registro' and password = '$pass'";
+			$sql=mysqli_query($conectar,$res);
+			if(!$sql){
+				echo"error";
+			}elseif(mysqli_num_rows($sql)==0){
+				echo"Usuario o contraseña incorrecta";
+			}
+			else{
+					while($row = mysqli_fetch_array($sql)) {
+				echo"Bienvenido Docente";
+				echo "<hr>";
+				echo "Nombre: ".$row[4]."<br>";
+				echo "Apellidos: ".$row[3]." ".$row[2]."<br>";
+				echo "ID: ".$row[0]."<br>";
+				echo "ID Academia: ".$row[1]."<br>";
+				header ("Location: maestros.html?");
+			}
+
+			}
+		}else{
+			while($row = mysqli_fetch_array($sql)) {
+				echo"Bienvenido Alumno";
+				echo "<hr>";
+				echo "Nombre: ".$row[7]."<br>";
+				echo "Apellidos: ".$row[5]." ".$row[4]."<br>";
+				echo "Registro: ".$row[0]."<br>";
+				echo "Domicilio: ".$row[1]." ".$row[6]."<br>";
+				echo "Celular: ".$row[2]."<br>";
+				echo "Sexo: ".$row[3]."<br>";
+				echo "Clave Municipio: ".$row[9]."<br>";
+				echo "ID Carrera: ".$row[10]."<br>";
+			}
+			mysqli_free_result($sql);
+
+	}
+
+
+
+
+	
+}
+?>
