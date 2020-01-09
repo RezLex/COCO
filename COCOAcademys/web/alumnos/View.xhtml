@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlumnosViewDlg" widgetVar="AlumnosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAlumnosTitle}">
+            <h:form id="AlumnosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{alumnosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_id}"/>
+                        <h:outputText value="#{alumnosController.selected.id}" title="#{bundle.ViewAlumnosTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_nombres}"/>
+                        <h:outputText value="#{alumnosController.selected.nombres}" title="#{bundle.ViewAlumnosTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_apellidos}"/>
+                        <h:outputText value="#{alumnosController.selected.apellidos}" title="#{bundle.ViewAlumnosTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_idCurso}"/>
+                        <h:outputText value="#{alumnosController.selected.idCurso}" title="#{bundle.ViewAlumnosTitle_idCurso}"/>
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_cursos}"/>
+                        <h:outputText value="#{alumnosController.selected.cursos}" title="#{bundle.ViewAlumnosTitle_cursos}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AlumnosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

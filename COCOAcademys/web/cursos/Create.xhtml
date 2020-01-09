@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CursosCreateDlg" widgetVar="CursosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCursosTitle}">
+            <h:form id="CursosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cursosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCursosLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{cursosController.selected.id}" title="#{bundle.CreateCursosTitle_id}" required="true" requiredMessage="#{bundle.CreateCursosRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateCursosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{cursosController.selected.nombre}" title="#{bundle.CreateCursosTitle_nombre}" required="true" requiredMessage="#{bundle.CreateCursosRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateCursosLabel_NAlumnos}" for="NAlumnos" />
+                        <p:inputText id="NAlumnos" value="#{cursosController.selected.NAlumnos}" title="#{bundle.CreateCursosTitle_NAlumnos}" required="true" requiredMessage="#{bundle.CreateCursosRequiredMessage_NAlumnos}"/>
+                        <p:outputLabel value="#{bundle.CreateCursosLabel_idMaestro}" for="idMaestro" />
+                        <p:selectOneMenu id="idMaestro" value="#{cursosController.selected.idMaestro}" required="true" requiredMessage="#{bundle.EditCursosRequiredMessage_idMaestro}">
+                            <f:selectItems value="#{maestrosController.itemsAvailableSelectOne}"
+                                           var="idMaestroItem"
+                                           itemValue="#{idMaestroItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCursosLabel_alumnos}" for="alumnos" />
+                        <p:selectOneMenu id="alumnos" value="#{cursosController.selected.alumnos}" required="true" requiredMessage="#{bundle.EditCursosRequiredMessage_alumnos}">
+                            <f:selectItems value="#{alumnosController.itemsAvailableSelectOne}"
+                                           var="alumnosItem"
+                                           itemValue="#{alumnosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cursosController.create}" value="#{bundle.Save}" update="display,:CursosListForm:datalist,:growl" oncomplete="handleSubmit(args,'CursosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CursosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

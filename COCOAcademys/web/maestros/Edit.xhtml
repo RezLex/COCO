@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MaestrosEditDlg" widgetVar="MaestrosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMaestrosTitle}">
+            <h:form id="MaestrosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{maestrosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMaestrosLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{maestrosController.selected.id}" title="#{bundle.EditMaestrosTitle_id}" required="true" requiredMessage="#{bundle.EditMaestrosRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditMaestrosLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{maestrosController.selected.nombres}" title="#{bundle.EditMaestrosTitle_nombres}" required="true" requiredMessage="#{bundle.EditMaestrosRequiredMessage_nombres}"/>
+                        <p:outputLabel value="#{bundle.EditMaestrosLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{maestrosController.selected.apellidos}" title="#{bundle.EditMaestrosTitle_apellidos}" required="true" requiredMessage="#{bundle.EditMaestrosRequiredMessage_apellidos}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{maestrosController.update}" value="#{bundle.Save}" update="display,:MaestrosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MaestrosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MaestrosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

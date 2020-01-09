@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PublicacionesCreateDlg" widgetVar="PublicacionesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePublicacionesTitle}">
+            <h:form id="PublicacionesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{publicacionesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePublicacionesLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{publicacionesController.selected.id}" title="#{bundle.CreatePublicacionesTitle_id}" required="true" requiredMessage="#{bundle.CreatePublicacionesRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicacionesLabel_contenido}" for="contenido" />
+                        <p:inputTextarea rows="4" cols="30" id="contenido" value="#{publicacionesController.selected.contenido}" title="#{bundle.CreatePublicacionesTitle_contenido}" required="true" requiredMessage="#{bundle.CreatePublicacionesRequiredMessage_contenido}"/>
+                        <p:outputLabel value="#{bundle.CreatePublicacionesLabel_idCurso}" for="idCurso" />
+                        <p:selectOneMenu id="idCurso" value="#{publicacionesController.selected.idCurso}" required="true" requiredMessage="#{bundle.EditPublicacionesRequiredMessage_idCurso}">
+                            <f:selectItems value="#{cursosController.itemsAvailableSelectOne}"
+                                           var="idCursoItem"
+                                           itemValue="#{idCursoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{publicacionesController.create}" value="#{bundle.Save}" update="display,:PublicacionesListForm:datalist,:growl" oncomplete="handleSubmit(args,'PublicacionesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PublicacionesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
