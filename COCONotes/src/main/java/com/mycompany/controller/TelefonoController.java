@@ -31,7 +31,17 @@ public class TelefonoController implements Serializable {
     @Inject
     private Telefono telefono;
     private List<Telefono> telefonos;
+    private String act;
 
+    public String getAct() {
+        return act;
+    }
+
+    public void setAct(String act) {
+        this.act = act;
+    }
+    
+    
     public Telefono getTelefono() {
         return telefono;
     }
@@ -62,6 +72,16 @@ public class TelefonoController implements Serializable {
         telefono.setPersona(us.getId());
         telefonoEJB.create(telefono);
         telefonos = telefonoEJB.findAll();
+    }
+    
+    public void leer(Telefono TelfS){
+        telefono = TelfS;
+        this.setAct("M");
+        
+    }
+    
+    public void modify(){
+        telefonoEJB.edit(telefono);
     }
     
     

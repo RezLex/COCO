@@ -12,7 +12,7 @@
             <ui:define name="content">
                 <h:form id="frmp">
                     <h1>Telefonos</h1>
-                    <p:commandButton icon="ui-icon-plusthick" value="Nuevo" onclick="PF('wdialogo').show();"/>
+                    <p:commandButton icon="ui-icon-plusthick" value="Nuevo" onclick="PF('wdialogo').show();" actionListener="#{Tel.setAct('R')}" update=":frmD"/>
                 </h:form>
                 
                 <p:dataTable id="tabla" emptyMessage="Ningún número registrado" value="#{Tel.telefonos}" var="tel">
@@ -20,18 +20,19 @@
                         <h:outputText value="#{tel.numero}"/>
                     </p:column>
                     <p:column headerText="Editar">
-                        <p:commandLink value="Editar">
+                        <p:commandLink value="Editar" actionListener="#{Tel.leer(tel)}" oncomplete="PF('wdialogo').show();" update=":dialogo">
                             
                         </p:commandLink>
                     </p:column>
                 </p:dataTable>
 
                 <p:dialog id="dialogo" widgetVar="wdialogo" header="Nuevo Telefono" modal="true" resizable="false" draggable="false" closeOnEscape="true">
-                    <h:form>
+                    <h:form id="frmD">
                         <h:panelGrid columns="2">
                             <p:outputLabel for="txtnumero" value="Numero"/>
                             <p:inputMask id="txtnumero" mask="9?999999999"  required="true" value="#{Tel.telefono.numero}"/>
-                            <p:commandButton id="reg" value="Registrar" icon="ui-icon-check" update=":tabla" actionListener="#{Tel.registrar()}" onclick="PF('wdialogo').hide();"/>
+                            <p:commandButton id="reg" value="Registrar" icon="ui-icon-check" update=":tabla" actionListener="#{Tel.registrar()}" onclick="PF('wdialogo').hide();" rendered="#{Tel.act =='R'}"/>
+                            <p:commandButton id="mod" value="Modificar" icon="ui-icon-check" update=":tabla" actionListener="#{Tel.modify()}" onclick="PF('wdialogo').hide();" rendered="#{Tel.act =='M'}"/>
                             <p:commandButton value="Cancelar" icon="ui-icon-close" immediate="true" onclick="PF('wdialogo').hide();"/>
                             
 
