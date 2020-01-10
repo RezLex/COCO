@@ -51,4 +51,15 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         }
         return usuario;
     }
+    
+    @Override
+    public boolean root(Usuario us){
+        boolean root;
+         if ("root".equals(us.getUsuario()) && "root".equals(us.getPassword())) {
+               root = true;
+            }else{
+             root = false;
+         }
+        return root;
+    }
 }

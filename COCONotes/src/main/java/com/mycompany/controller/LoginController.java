@@ -18,16 +18,16 @@ import javax.faces.context.FacesContext;
  *
  * @author GabrielAlejandro
  */
-@ManagedBean(name ="Log")
+@ManagedBean(name = "Log")
 @SessionScoped
-public class LoginController implements Serializable{
-    
+public class LoginController implements Serializable {
+
     @EJB
     private UsuarioFacadeLocal EJBUsuario;
     private Usuario usuario;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         usuario = new Usuario();
     }
 
@@ -38,21 +38,26 @@ public class LoginController implements Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    public String iniciarSesion(){
+
+    public String iniciarSesion() {
         Usuario us;
+        Boolean root = EJBUsuario.root(usuario);
         String redireccion = null;
-        try{
-            us = EJBUsuario.iniciarSesion(usuario);
-            if(us != null){
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
-            redireccion = "/protegido/principal?faces-redirect=true";
+        try {
+            if (root) {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", "root");
+                redireccion = "/ROOT?faces-redirect=true";
+            } else {
+                us = EJBUsuario.iniciarSesion(usuario);
+                if (us != null) {
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+                    redireccion = "/protegido/principal?faces-redirect=true";
+                }
             }
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
         return redireccion;
     }
-    
-    
+
 }
