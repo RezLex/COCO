@@ -5,7 +5,9 @@
  */
 package facades;
 
+import entities.Categoria;
 import entities.Nota;
+import entities.Persona;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,6 +31,6 @@ public interface NotaFacadeLocal {
 
     int count();
     
-    List<Nota> buscar(int idPersona, int idCategoria) throws Exception;
+    List<Nota> buscar(Persona idPersona, int idCategoria) throws Exception;
     
 }

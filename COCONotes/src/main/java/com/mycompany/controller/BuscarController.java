@@ -69,8 +69,9 @@ public class BuscarController implements Serializable {
     public void buscar() {
         try {
             //Nota nota = new Nota();
+            
             Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-            listaNotas = notaEJB.buscar(us.getId().getId(), idCategoria);
+            listaNotas = notaEJB.buscar(us.getId(), idCategoria);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

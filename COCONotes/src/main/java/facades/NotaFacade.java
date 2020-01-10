@@ -5,7 +5,9 @@
  */
 package facades;
 
+import entities.Categoria;
 import entities.Nota;
+import entities.Persona;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,13 +34,11 @@ public class NotaFacade extends AbstractFacade<Nota> implements NotaFacadeLocal 
     }
 
     @Override
-    public List<Nota> buscar(int idPersona, int idCategoria) throws Exception {
+    public List<Nota> buscar(Persona idPersona, int idCategoria) throws Exception {
         List<Nota> lista;
-        try{
-           
-            Query query = em.createQuery("SELECT n FROM Nota n WHERE n.id_persona = :id_persona and n.id_categoria = :id_categoria");
+        try{        
+            Query query = em.createQuery("SELECT n FROM Nota n WHERE n.id_persona = :id_persona");
             query.setParameter("id_persona", idPersona);
-            query.setParameter("id_categoria", idCategoria);
             
             lista = query.getResultList();
         }catch(Exception e){
